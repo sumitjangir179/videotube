@@ -78,7 +78,7 @@ const registerUser = asyncHandler(async (req, res) => {
 const loginUser = asyncHandler(async (req, res) => {
     const { email, userName, password } = req.body;
 
-    if (!(email || userName)) {
+    if (!(email && userName)) {
         throw new ApiError(400, "username and email is required");
     }
 
@@ -300,4 +300,5 @@ const getWatchHistory = asyncHandler(async (req, res) => {
 
     return res.status(200).json(new ApiResponse(200, user[0].watchHistory, 'Watched history fetched successfully'))
 });
+
 export { registerUser, loginUser, logoutUser, refreshAccessToken, changeCurrentPassword, getCurrentUser, updateAccountDetails, updateUserAvatar, updateUserCoverImage, getUserChannelProfile, getWatchHistory };
